@@ -25,4 +25,4 @@ function onClickImage(event){
 }
 
 console.log(galleryItems);
-console.log(galleryItems);
+
