@@ -3,7 +3,7 @@ import { galleryItems } from './gallery-items';
 // Change code below this line
 const listGallery = document.querySelector('.gallery');
 const linkImageAll = listGallery.querySelectorAll(".gallery__item");
-
+console.log(listGallery);
 const markup = galleryItems.map((image)=>
 `<a class="gallery__item" href="${image.original}">
     <img
