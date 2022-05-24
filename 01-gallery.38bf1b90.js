@@ -3,4 +3,4 @@ parcelRequire=function(e,r,t,n){var i,o="function"==typeof parcelRequire&&parcel
 },{}],"TfQ5":[function(require,module,exports) {
 "use strict";var e=require("./gallery-items");const l=document.querySelector(".gallery"),n=l.querySelectorAll(".gallery__item");console.log(l);const r=e.galleryItems.map(e=>`<a class="gallery__item" href="${e.original}">\n    <img\n    class="gallery__image"\n    src="${e.preview}"\n    alt="${e.description}"\n    title="${e.description}"\n    />\n</a>`).join("");function t(e){e.preventDefault();new SimpleLightbox(".gallery a",{captionDelay:250})}l.insertAdjacentHTML("beforeend",r),l.addEventListener("click",t),console.log(e.galleryItems);
 },{"./gallery-items":"q5Rn"}]},{},["TfQ5"], null)
-//# sourceMappingURL=/goit-js-hw-08/01-gallery.6affbf9b.js.map
+//# sourceMappingURL=/goit-js-hw-08/01-gallery.38bf1b90.js.map
