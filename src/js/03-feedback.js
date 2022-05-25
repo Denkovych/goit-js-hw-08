@@ -8,31 +8,39 @@ const btnSubmit = feedbackForm.querySelector('[type = submit]');
 console.log(btnSubmit)
 var throttle = require('lodash.throttle');
 
-btnSubmit.addEventListener('click', throttle(pushBtnSubmit , 500) );
+btnSubmit.addEventListener('submit', pushBtnSubmit);
 emailInput.addEventListener('input', throttle(inputEmail, 500) );
-messageInput.addEventListener('input', inputMessage);
+messageInput.addEventListener('input', throttle(inputMessage, 500));
 
+function pushBtnSubmit(evt){
+    evt.preventDefault(); 
+    let loginInfo = {};
+    if (emailInput.value !== '' && messageInput.value !== '')
+    {loginInfo.email = emailInput.value;
+    loginInfo.message = messageInput.value;   
+    console.log(loginInfo);
+    feedbackForm.reset();
+     emailInput.reset()
+    messageInput.reset()}
+}
 
 
 function inputEmail(evt){
     evt.preventDefault();
-    console.log(evt.currentTarget.value);
-    email = evt.currentTarget.value;
-localStorage.setItem('email', email)
-    };
-    console.log(inputEmail.value);
+    console.log(evt.target.value);
+    email = evt.target.value;
+    localStorage.setItem('email', email)};
+
     let email = localStorage.getItem('email');
-emailInput.value = email;
+    emailInput.value = email;
 
 function inputMessage(evt){
     evt.preventDefault();
-    console.log(evt.currentTarget.value);
-message = evt.currentTarget.value;
-    localStorage.setItem('message', message)
-}
-let message = localStorage.getItem('message');
-messageInput.value = message;
+    console.log(evt.target.value);
+    message = evt.target.value;
+    localStorage.setItem('message', message)};
 
-function pushBtnSubmit(evt){
-console.log('qwe');
-}
+    let message = localStorage.getItem('message');
+    messageInput.value = message;
+    
+    console.log(messageInput.target.value);
