@@ -1,41 +1,15 @@
 const video = document.querySelector("#vimeo-player");
-console.log(video);
 const player = new Vimeo.Player(video);
-console.log(player);
-//player.on('play', function() {
-    //console.log('played the video!');
-//});
 
-//player.getVideoTitle().then(function(title) {
-    //console.log('title:', title);
-//});
+player.on('timeupdate',saveCarrentTime );
 
-
-//console.log(dataSec);
-let t = [];
-console.log(t);
-player.on('timeupdate', function(data) {
-   // console.log(data);
-   if(data !== 0){
+function saveCarrentTime (data){
+    localStorage.setItem("videoplayer-current-time", data.seconds);
     console.log(data.seconds);
-     
-   }
-   
-    
-   //console.log(data);
-   
-    // seconds = the actual time that the player seeked to
+    video.reset();
+};
 
-});
-player.on('pause', function(data){
-    console.log(data);
-});
-localStorage.setItem("videoplayer-current-time", t.seconds);
     let time = localStorage.getItem('videoplayer-current-time');
     console.log(time);
-player.setCurrentTime(10);
+    player.setCurrentTime(time);
 
-//console.log(data);
-//localStorage.setItem("videoplayer-current-time", data.seconds);
-//let time = localStorage.getItem('videoplayer-current-time');
-//console.log(time);
