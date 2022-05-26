@@ -14,12 +14,13 @@ function saveForm(event) {
     event.preventDefault()
     formData.email = emailInput.value;
     formData.message = messageInput.value; 
-   const KEY = localStorage.setItem("feedback-form-state", JSON.stringify(formData));}
+    
+    localStorage.setItem("feedback-form-state", JSON.stringify(formData));}
 
 function inputSaveForm(){
     const saveFormData = localStorage.getItem("feedback-form-state");
     const parsedSaveFormData = JSON.parse(saveFormData);
-    console.log(parsedSaveFormData);
+    
     emailInput.value = parsedSaveFormData.email;
     messageInput.value = parsedSaveFormData.message;
     }
