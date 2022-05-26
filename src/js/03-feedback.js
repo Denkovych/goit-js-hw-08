@@ -1,42 +1,39 @@
-const feedbackForm =document.querySelector(".feedback-form");
-console.log(feedbackForm);
-const emailInput = feedbackForm.querySelector('[type = "email"]');
-console.log(emailInput);
-const messageInput = feedbackForm.querySelector('[name = "message"]');
-console.log(messageInput);
 var throttle = require('lodash.throttle');
 
+const feedbackForm =document.querySelector(".feedback-form");
+const emailInput = feedbackForm.querySelector('[type = "email"]');
+const messageInput = feedbackForm.querySelector('[name = "message"]');
+
+let formData = {};
+
 feedbackForm.addEventListener('submit', pushBtnSubmit);
-emailInput.addEventListener('input', throttle(inputEmail, 500) );
-messageInput.addEventListener('input', throttle(inputMessage, 500));
+feedbackForm.addEventListener('input', throttle(saveForm, 500) )
 
-function inputEmail(evt){
-    evt.preventDefault();
-    email = evt.target.value;
-    localStorage.setItem('email', email)};
 
-    let email = localStorage.getItem('email');
-    emailInput.value = email;
+function saveForm(event) {
+    event.preventDefault()
+    formData.email = emailInput.value;
+    formData.message = messageInput.value; 
+   const KEY = localStorage.setItem("feedback-form-state", JSON.stringify(formData));}
 
-function inputMessage(evt){ 
-    evt.preventDefault(); 
-    message = evt.target.value; 
-    localStorage.setItem('message', message)};
-    let message = localStorage.getItem('message'); 
-    messageInput.value = message;
+function inputSaveForm(){
+    const saveFormData = localStorage.getItem("feedback-form-state");
+    const parsedSaveFormData = JSON.parse(saveFormData);
+    console.log(parsedSaveFormData);
+    emailInput.value = parsedSaveFormData.email;
+    messageInput.value = parsedSaveFormData.message;
+    }
+inputSaveForm();   
 
 function pushBtnSubmit (evt) {
     evt.preventDefault(); 
     let loginInfo = {};
 
-    if(emailInput.value === "" || messageInput.value ===""){
-        alert('Потрібно заповнити всі поля');}
-    else if (emailInput.value !== '' && messageInput.value !== ''){
-        loginInfo.email = `${emailInput.value}`;
-        loginInfo.message = `${messageInput.value}`; 
-        console.log(loginInfo);
+    loginInfo.email = `${emailInput.value}`;
+    loginInfo.message = `${messageInput.value}`; 
+    console.log(loginInfo);
 
-        feedbackForm.reset(); 
-        localStorage.removeItem('message')
-        localStorage.removeItem('email')}};
+    feedbackForm.reset(); 
+    localStorage.removeItem('message')
+    localStorage.removeItem('email')};
         
